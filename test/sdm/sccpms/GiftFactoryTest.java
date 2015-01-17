@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import sdm.sccpms.exceptions.UndefinedProductException;
@@ -17,6 +18,7 @@ public class GiftFactoryTest {
 	GiftWrap giftWrap;
 	Map<String, ProductFactoryInterface> productFactories;
 	
+	@Before
 	public void init() {
 		this.productFactories = new HashMap<String, ProductFactoryInterface>();
 		this.productFactories.put("bicycle", new BicycleFactory());
@@ -29,14 +31,14 @@ public class GiftFactoryTest {
 	}
 
 	@Test
-	public void testGetGift() {
+	public void testGetGift() throws UndefinedProductException {
 		Gift gift = this.giftFactory.createGift("bicycle");
 		assertEquals(this.giftWrap, gift.getGiftWrap());
 		assertTrue(gift.getProduct() instanceof Bicycle);
 	}
 	
 	@Test(expected=UndefinedProductException.class)
-	public void testGetUndefinedGift() {
+	public void testGetUndefinedGift() throws UndefinedProductException {
 		this.giftFactory.createGift("peace");
 	}
 
