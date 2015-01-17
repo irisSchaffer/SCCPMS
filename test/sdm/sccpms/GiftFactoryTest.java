@@ -21,7 +21,7 @@ public class GiftFactoryTest {
 	@Before
 	public void init() {
 		this.productFactories = new HashMap<String, ProductFactoryInterface>();
-		this.productFactories.put("bicycle", new BicycleFactory());
+		this.productFactories.put(Bicycle.ID, new BicycleFactory());
 		
 		this.giftWrap = new GiftWrap("blue", "yellow stripes");
 		List<GiftWrap> giftWraps = new LinkedList<GiftWrap>();
@@ -32,7 +32,7 @@ public class GiftFactoryTest {
 
 	@Test
 	public void testGetGift() throws UndefinedProductException {
-		Gift gift = this.giftFactory.createGift("bicycle");
+		Gift gift = this.giftFactory.createGift(Bicycle.ID);
 		assertEquals(this.giftWrap, gift.getGiftWrap());
 		assertTrue(gift.getProduct() instanceof Bicycle);
 	}
