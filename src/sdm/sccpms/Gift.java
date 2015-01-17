@@ -3,7 +3,7 @@ package sdm.sccpms;
 public class Gift {
 	public GiftWrap giftWrap;
 	public ProductInterface product;
-	
+
 	public Gift(ProductInterface product, GiftWrap giftWrap) {
 		super();
 		this.giftWrap = giftWrap;
