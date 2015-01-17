@@ -18,14 +18,14 @@ public class ChildTest {
 	public void testChildConstructors() {
 		Child child = new Child(NAME, STREET);
 		assertEquals(NAME, child.getName());
-		assertEquals(STREET, child.getGoodness());
-		assertEquals(Child.INITIAL_GOODNESS, child.getGoodness());
+		assertEquals(STREET, child.getAddress());
+		assertEquals(Child.INITIAL_GOODNESS, child.getGoodness(), 0.0f);
 
 		float goodness = .7f;
 		child = new Child(NAME, STREET, goodness);
-		assertEquals(goodness, child.getGoodness());
 		assertEquals(NAME, child.getName());
-		assertEquals(STREET, child.getGoodness());
+		assertEquals(STREET, child.getAddress());
+		assertEquals(goodness, child.getGoodness(), 0.0f);
 	}
 
 	@Test
@@ -36,26 +36,26 @@ public class ChildTest {
 		goodness += Child.GOODNESS_CHANGE;
 		child.doGood();
 		
-		assertEquals(goodness, child.getGoodness());
+		assertEquals(goodness, child.getGoodness(), 0.0f);
 		
 		goodness += .2f;
 		child.doGood(.2f);
 		
-		assertEquals(goodness, child.getGoodness());
+		assertEquals(goodness, child.getGoodness(), 0.0f);
 		
 		goodness -= Child.GOODNESS_CHANGE;
 		child.doBad();
 		
-		assertEquals(goodness, child.getGoodness());
+		assertEquals(goodness, child.getGoodness(), 0.0f);
 		
 		goodness -= .01f;
 		child.doBad(.01f);
-		assertEquals(goodness, child.getGoodness());
+		assertEquals(goodness, child.getGoodness(), 0.0f);
 		
 		child.doBad(2f);
-		assertEquals(0f, child.getGoodness());
+		assertEquals(0f, child.getGoodness(), 0.0f);
 
 		child.doGood(2f);
-		assertEquals(1f, child.getGoodness());
+		assertEquals(1f, child.getGoodness(), 0.0f);
 	}
 }

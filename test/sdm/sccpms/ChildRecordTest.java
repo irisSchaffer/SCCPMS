@@ -20,10 +20,12 @@ public class ChildRecordTest {
 	@Before
 	public void init() {
 		this.child = new Child("Tom", "Street 15, 0000 City, Country");
+		this.childRecord = new ChildRecord(child);
+		
 		wishList2009 = new LinkedList<String>();
 		wishList2009.add("bicycle");
 		this.christmasRecord2009 = new ChristmasRecord(wishList2009, 2009);
-		this.childRecord.addChristmasRechord(this.christmasRecord2009);
+		this.childRecord.addChristmasRecord(this.christmasRecord2009);
 
 		currentWishList = new LinkedList<String>();
 		currentWishList.add("tv-set");
@@ -36,8 +38,9 @@ public class ChildRecordTest {
 	public void testAddChristmasRecordForSameYearTwice() {
 		List<String> wishList = new LinkedList<String>();
 		wishList.add("test-wish");
+		ChristmasRecord christmasRecord = new ChristmasRecord(wishList, 2009);
 
-		this.childRecord.addChristmasRecord(wishList, 2009);
+		this.childRecord.addChristmasRecord(christmasRecord);
 	}
 	
 	@Test

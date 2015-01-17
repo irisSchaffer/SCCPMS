@@ -24,7 +24,7 @@ We want to create a Santa Claus christmas present management system (SCCPMS). Ch
 
 ###### 16.01.2015
 
-We are panicing because a colleague pointed out that the project deadline is the 19th of January.
+We are panicking because a colleague pointed out that the project deadline is the 19th of January.
 
 ---
 

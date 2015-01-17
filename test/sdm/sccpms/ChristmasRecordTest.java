@@ -2,6 +2,7 @@ package sdm.sccpms;
 
 import static org.junit.Assert.*;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,11 +14,12 @@ public class ChristmasRecordTest {
 	
 	@Test
 	public void testConstructors() {
-		this.record = new ChristmasRecord(this.getWishList());
+		List<String> wishList = this.getWishList();
+		this.record = new ChristmasRecord(wishList);
 		assertEquals(wishList, this.record.getWishList());
 		assertEquals(Calendar.getInstance().get(Calendar.YEAR), this.record.getYear());
 		
-		this.record = new ChristmasRecord(this.getWishList(), 2009);
+		this.record = new ChristmasRecord(wishList, 2009);
 		assertEquals(wishList, this.record.getWishList());
 		assertEquals(2009, this.record.getYear());
 	}
