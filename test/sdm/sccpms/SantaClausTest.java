@@ -10,6 +10,7 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import sdm.sccpms.gift.BinaryGiftGivingStrategy;
 import sdm.sccpms.gift.GiftFactory;
 import sdm.sccpms.gift.GiftWrap;
 import sdm.sccpms.products.Bicycle;
@@ -30,6 +31,7 @@ import sdm.sccpms.products.TVSetFactory;
 public class SantaClausTest {	
 	SantaClaus santa;
 	GiftFactory giftFactory;
+	private Child child;
 
 	@Before
 	public void init() {
@@ -45,14 +47,14 @@ public class SantaClausTest {
 		giftWraps.add(new GiftWrap("blue", "white dots"));
 		giftWraps.add(new GiftWrap("green", "yellow stripes"));
 		
-		this.giftFactory = new GiftFactory(productFactories, giftWraps);		
+		this.giftFactory = new GiftFactory(productFactories, giftWraps);
+		this.child = this.getChild();
 		
-		this.santa = new SantaClaus(giftFactory);				
+		this.santa = new SantaClaus(giftFactory, new BinaryGiftGivingStrategy());				
 	}
 	
 	@Test
 	public void testAddChild() {
-		Child child = this.getChild();
 		this.santa.addChild(child);
 		assertEquals(1, this.santa.getChildRecords().size());
 		assertTrue(child.getWishGranter() instanceof SantaClaus);
@@ -60,7 +62,6 @@ public class SantaClausTest {
 	
 	@Test
 	public void testAddChristmasRecordForExistingChild() {
-		Child child = this.getChild();
 		this.santa.addChild(child);
 		
 		ChristmasRecord record = new ChristmasRecord(child.getWishList(), 2009);
@@ -70,7 +71,6 @@ public class SantaClausTest {
 	}
 	
 	public void testAddChristmasRecordForNewChild() {
-		Child child = this.getChild();
 		ChristmasRecord record = new ChristmasRecord(child.getWishList());
 		this.santa.addChristmasRecordforChild(record, child);
 		
@@ -80,12 +80,21 @@ public class SantaClausTest {
 	
 	@Test
 	public void testOnWishListFinished() {
-		Child child = this.getChild();
 		this.santa.addChild(child);
 		
 		child.putWishListOnWindowSill();
 		
 		assertTrue(this.santa.getGifts().size() > 0);
+	}
+	
+	public void testDeliverGifts() {
+		this.child.setGoodness(1f);
+		this.santa.addChild(this.child);
+		child.putWishListOnWindowSill();
+		
+		this.santa.deliverGifts();
+		assertEquals(2, this.child.getGifts().size());
+		assertEquals(0, this.santa.getGifts().size());
 	}
 	
 	private Child getChild() {
