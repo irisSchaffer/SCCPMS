@@ -1,13 +1,27 @@
 package sdm.sccpms;
 
-public class Child {
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Observable;
+
+public class Child extends Observable {
 	public static final float INITIAL_GOODNESS = .5f;
 	public static final float GOODNESS_CHANGE = .1f;
 	
 	private String name;
 	private String address;
 	private float goodness;
+	private boolean finishedWishList = false;
+	private List<String> wishList = new LinkedList<String>();
 	
+	public List<String> getWishList() {
+		return wishList;
+	}
+
+	public void addToWishList(String wish) {
+		this.wishList.add(wish);
+	}
+
 	public Child(String name, String address) {
 		this(name, address, Child.INITIAL_GOODNESS);
 	}
@@ -62,5 +76,19 @@ public class Child {
 		} else {
 			this.goodness = goodness;			
 		}
+	}	
+
+	public boolean isFinishedWishList() {
+		return finishedWishList;
 	}
+
+	public void setFinishedWishList(boolean finishedWishList) {
+		this.finishedWishList = finishedWishList;
+	}
+
+	public void putWishListOnWindowSill() {
+		this.setFinishedWishList(true);
+		this.setChanged();
+		this.notifyObservers();	
+	}		
 }

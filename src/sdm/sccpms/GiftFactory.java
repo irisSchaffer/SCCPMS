@@ -30,6 +30,8 @@ public class GiftFactory {
 
 	private GiftWrap getGiftWrap() {
 		int index = (int) Math.round(Math.random() * this.giftWraps.size());
+		if (index >= this.giftWraps.size())
+			--index;
 		return this.giftWraps.get(index);
 	}
 
