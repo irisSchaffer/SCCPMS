@@ -64,14 +64,15 @@ public class SantaClausTest {
 	public void testAddChristmasRecordForExistingChild() {
 		this.santa.addChild(child);
 		
-		ChristmasRecord record = new ChristmasRecord(child.getWishList(), 2009);
+		ChristmasRecord record = new ChristmasRecord(child.getWishList(), child.getGoodness(), 2009);
 		this.santa.addChristmasRecordforChild(record, child);
 		
 		assertEquals(record, this.santa.getChildRecords().get(child).getChristmasRecordForYear(2009));
 	}
 	
+	@Test
 	public void testAddChristmasRecordForNewChild() {
-		ChristmasRecord record = new ChristmasRecord(child.getWishList());
+		ChristmasRecord record = new ChristmasRecord(child.getWishList(), child.getGoodness());
 		this.santa.addChristmasRecordforChild(record, child);
 		
 		assertNotNull(this.santa.getChildRecords().get(child));
@@ -100,8 +101,8 @@ public class SantaClausTest {
 	
 	private Child getChild() {
 		Child child = new Child("Max", "Street 9, 1001 City, Country");	
-		child.addToWishList("i-pod");		
-		child.addToWishList("cat");
+		child.addToWishList(IPod.ID);		
+		child.addToWishList(Cat.ID);
 		
 		return child;
 	}

@@ -3,6 +3,8 @@ package sdm.sccpms;
 import java.util.LinkedList;
 import java.util.List;
 
+import sdm.sccpms.gift.Gift;
+
 /**
  * TODO: Add state pattern to child depending on if wish list has already been put on window sill or not.
  * @author iris
@@ -18,6 +20,8 @@ public class Child {
 	private boolean finishedWishList = false;
 	private List<String> wishList = new LinkedList<String>();
 	private WishGranterInterface wishGranter;
+	private List<Gift> gifts;
+	private boolean hasPutOutCookiesAndMilk;
 	
 	public Child(String name, String address) {
 		this(name, address, Child.INITIAL_GOODNESS);
@@ -27,6 +31,8 @@ public class Child {
 		this.name = name;
 		this.address = address;
 		this.goodness = goodness;
+		this.gifts = new LinkedList<Gift>();
+		this.hasPutOutCookiesAndMilk = false;
 	}
 	
 	public List<String> getWishList() {
@@ -83,6 +89,15 @@ public class Child {
 		this.address = address;
 	}
 
+	public List<Gift> getGifts() {
+		return gifts;
+	}
+
+	public void addGift(Gift gift) {
+		System.out.println(String.format("%s receives %s", this.getName(), gift));
+		this.gifts.add(gift);
+	}
+
 	public WishGranterInterface getWishGranter() {
 		return wishGranter;
 	}
@@ -105,6 +120,49 @@ public class Child {
 	public void putWishListOnWindowSill() {		
 		this.finishedWishList = true;
 		this.wishGranter.onWishListFinished(this);
-	}	
+	}
+
+	public boolean hasPutOutCookiesAndMilk() {
+		return this.hasPutOutCookiesAndMilk;
+	}
 	
+	public void putOutCookiesAndMild() {
+		this.hasPutOutCookiesAndMilk = true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Child other = (Child) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+	
+	public String toString() {
+		return this.getName() + " living at " + this.getAddress();
+	}
+
 }

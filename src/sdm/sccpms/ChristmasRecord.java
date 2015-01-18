@@ -6,34 +6,36 @@ import java.util.List;
 public class ChristmasRecord {
 	private List<String> wishList;
 	private int year;
+	private float goodness;
 
-	public ChristmasRecord(List<String> wishList) {
-		this(wishList, Calendar.getInstance().get(Calendar.YEAR));
+	public ChristmasRecord(List<String> wishList, float goodness) {
+		this(wishList, goodness, Calendar.getInstance().get(Calendar.YEAR));
 	}
 
-	public ChristmasRecord(List<String> wishList, int year) {
+	public ChristmasRecord(List<String> wishList, float goodness, int year) {
+		if (wishList.size() < 1) {
+			throw new IllegalArgumentException("Can only add christmas records with wish lists of at least one wish.");
+		}
+		
+		this.wishList = wishList;
 		this.year = year;
-		this.setWishList(wishList);
+		this.goodness = goodness;
 	}
 
 	public List<String> getWishList() {
 		return wishList;
 	}
 
-	public void setWishList(List<String> wishList) {
-		if (wishList.size() < 1) {
-			throw new IllegalArgumentException("Can only add christmas records with wish lists of at least one wish.");
-		}
-		
-		this.wishList = wishList;
-	}
-
 	public int getYear() {
 		return year;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
+	public float getGoodness() {
+		return goodness;
+	}
+
+	public void setGoodness(float goodness) {
+		this.goodness = goodness;
 	}
 
 	@Override

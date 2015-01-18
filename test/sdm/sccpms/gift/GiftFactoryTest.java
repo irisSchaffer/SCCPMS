@@ -9,6 +9,7 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import sdm.sccpms.Child;
 import sdm.sccpms.ProductFactoryInterface;
 import sdm.sccpms.exceptions.UndefinedProductException;
 import sdm.sccpms.gift.Gift;
@@ -20,12 +21,15 @@ import sdm.sccpms.products.*;
 public class GiftFactoryTest {
 	GiftFactory giftFactory;
 	GiftWrap giftWrap;
+	Child child;
 	Map<String, ProductFactoryInterface> productFactories;
 	
 	@Before
 	public void init() {
 		this.productFactories = new HashMap<String, ProductFactoryInterface>();
 		this.productFactories.put(Bicycle.ID, new BicycleFactory());
+		
+		this.child = new Child("Tom", "Teststreet");
 		
 		this.giftWrap = new GiftWrap("blue", "yellow stripes");
 		List<GiftWrap> giftWraps = new LinkedList<GiftWrap>();
@@ -36,14 +40,14 @@ public class GiftFactoryTest {
 
 	@Test
 	public void testGetGift() throws UndefinedProductException {
-		Gift gift = this.giftFactory.createGift(Bicycle.ID);
+		Gift gift = this.giftFactory.createGift(Bicycle.ID, child);
 		assertEquals(this.giftWrap, gift.getGiftWrap());
 		assertTrue(gift.getProduct() instanceof Bicycle);
 	}
 	
 	@Test(expected=UndefinedProductException.class)
 	public void testGetUndefinedGift() throws UndefinedProductException {
-		this.giftFactory.createGift("peace");
+		this.giftFactory.createGift("peace", child);
 	}
 
 }

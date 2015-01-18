@@ -22,15 +22,15 @@ public class ChildRecordTest {
 		this.child = new Child("Tom", "Street 15, 0000 City, Country");
 		this.childRecord = new ChildRecord(child);
 		
-		wishList2009 = new LinkedList<String>();
-		wishList2009.add("bicycle");
-		this.christmasRecord2009 = new ChristmasRecord(wishList2009, 2009);
+		this.wishList2009 = new LinkedList<String>();
+		this.wishList2009.add("bicycle");
+		this.christmasRecord2009 = new ChristmasRecord(this.wishList2009, child.getGoodness(), 2009);
 		this.childRecord.addChristmasRecord(this.christmasRecord2009);
 
-		currentWishList = new LinkedList<String>();
-		currentWishList.add("tv-set");
-		currentWishList.add("cat");
-		this.currentChristmasRecord = new ChristmasRecord(currentWishList);
+		this.currentWishList = new LinkedList<String>();
+		this.currentWishList.add("tv-set");
+		this.currentWishList.add("cat");
+		this.currentChristmasRecord = new ChristmasRecord(this.currentWishList, child.getGoodness());
 		this.childRecord.addChristmasRecord(this.currentChristmasRecord);
 	}
 

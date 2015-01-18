@@ -1,15 +1,18 @@
 package sdm.sccpms.gift;
 
+import sdm.sccpms.Child;
 import sdm.sccpms.ProductInterface;
 
 public class Gift {
-	public GiftWrap giftWrap;
-	public ProductInterface product;
+	private GiftWrap giftWrap;
+	private ProductInterface product;
+	private Child child;
 
-	public Gift(ProductInterface product, GiftWrap giftWrap) {
+	public Gift(ProductInterface product, Child child, GiftWrap giftWrap) {
 		super();
-		this.giftWrap = giftWrap;
 		this.product = product;
+		this.child = child;
+		this.giftWrap = giftWrap;
 	}
 
 	public GiftWrap getGiftWrap() {
@@ -27,4 +30,18 @@ public class Gift {
 	public void setProduct(ProductInterface product) {
 		this.product = product;
 	}
+
+	public Child getChild() {
+		return this.child;
+	}
+	
+	public void setGiftTag(Child child) {
+		this.child = child;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%s wrapped in %s.", this.getProduct(), this.getGiftWrap());
+	}
+	
 }

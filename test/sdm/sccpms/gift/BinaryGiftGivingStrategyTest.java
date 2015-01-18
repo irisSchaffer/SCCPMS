@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import sdm.sccpms.Child;
 import sdm.sccpms.products.Bicycle;
 import sdm.sccpms.products.BicycleFactory;
 
@@ -16,7 +17,11 @@ public class BinaryGiftGivingStrategyTest {
 	public void testGetGifts() {
 		GiftGivingStrategyInterface strategy = new BinaryGiftGivingStrategy();
 		List<Gift> gifts = new LinkedList<Gift>();
-		gifts.add(new Gift(new Bicycle(), new GiftWrap("green", "yellow dots")));
+		gifts.add(new Gift(
+			new Bicycle(),
+			new Child("Tom", "Teststreet"),
+			new GiftWrap("green", "yellow dots")
+		));
 		
 		assertEquals(gifts, strategy.getGifts(gifts, 1f));
 		assertEquals(gifts, strategy.getGifts(gifts, .5f));

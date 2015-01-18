@@ -25,4 +25,8 @@ public class GiftWrap {
 	public void setPattern(String pattern) {
 		this.pattern = pattern;
 	}
+	
+	public String toString() {
+		return this.getColor() + " gift wrap with " + this.getPattern();
+	}
 }
