@@ -10,6 +10,8 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import sdm.sccpms.exceptions.UndefinedProductException;
+import sdm.sccpms.exceptions.UnsupportedMethodException;
 import sdm.sccpms.products.Bicycle;
 import sdm.sccpms.products.BicycleFactory;
 import sdm.sccpms.products.Cat;
@@ -55,11 +57,16 @@ public class SantaClausTest {
 		this.santa.addChild(child);
 		this.child.setWishGranter(this.santa);
 		
-		this.child.putWishListOnWindowSill();				
+		this.child.putWishListOnWindowSill();
 	}
 	
 	@Test
 	public void testIsWishGranted() {
 		assertTrue(this.santa.isWishGranted());
 	}	
+	
+	@Test(expected=UnsupportedMethodException.class)
+	public void testAddToWishList() throws UnsupportedMethodException {
+		this.child.addToWishList("bicycle");		
+	}
 }

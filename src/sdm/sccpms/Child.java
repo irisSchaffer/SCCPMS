@@ -3,6 +3,8 @@ package sdm.sccpms;
 import java.util.LinkedList;
 import java.util.List;
 
+import sdm.sccpms.exceptions.UnsupportedMethodException;
+
 /**
  * TODO: Add state pattern to child depending on if wish list has already been put on window sill or not.
  * @author iris
@@ -19,8 +21,12 @@ public class Child {
 	private List<String> wishList = new LinkedList<String>();
 	private WishGranterInterface wishGranter;
 	
+	private WishListClosedState wishListClosed = new WishListClosedState();
+	private WishListOpenState wishListOpen = new WishListOpenState();
+	public State childState = wishListOpen;
+	
 	public Child(String name, String address) {
-		this(name, address, Child.INITIAL_GOODNESS);
+		this(name, address, Child.INITIAL_GOODNESS);		
 	}
 	
 	public Child(String name, String address, float goodness) {
@@ -28,12 +34,18 @@ public class Child {
 		this.address = address;
 		this.goodness = goodness;
 	}
-	
+
 	public List<String> getWishList() {
 		return wishList;
 	}
 	
 	public void addToWishList(String wish) {
+		if (this.childState == this.wishListClosed) {
+			throw new UnsupportedMethodException(
+				String.format("addToWishList method can't be called!")
+			);
+		}
+		
 		this.wishList.add(wish);
 	}
 	
@@ -94,10 +106,20 @@ public class Child {
 	public boolean isFinishedWishList() {
 		return finishedWishList;
 	}
+
+	public State getChildState() {
+		return childState;
+	}
+
+	public void setChildState(State childState) {
+		this.childState = childState;
+	}
 	
 	public List<String> takeWishList() {
-		List<String> wishList = this.wishList;
+		List<String> wishList = new LinkedList<String>(this.wishList);		
 		this.wishList.clear();
+				
+		this.changeState();
 		
 		return wishList;
 	}
@@ -105,6 +127,15 @@ public class Child {
 	public void putWishListOnWindowSill() {		
 		this.finishedWishList = true;
 		this.wishGranter.onWishListFinished(this);
+		
+		// state not changed for showing exception
+		// this.changeState();
 	}	
 	
+	public void changeState() {
+		if (this.childState == this.wishListClosed)
+			this.setChildState(this.wishListOpen);
+		else
+			this.setChildState(this.wishListClosed);
+	}
 }
