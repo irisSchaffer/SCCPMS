@@ -1,13 +1,12 @@
 package sdm.sccpms.products;
 
-import sdm.sccpms.ProductInterface;
+import sdm.sccpms.Product;
 
-public class Bicycle implements ProductInterface {
+public class Bicycle extends Product {
 	public static final String ID = "bicycle";
-	
+
 	@Override
 	public String getName() {
-		return "Bycicle";
+		return ID;
 	}
-
 }

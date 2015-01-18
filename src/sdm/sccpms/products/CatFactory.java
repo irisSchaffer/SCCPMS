@@ -7,7 +7,7 @@ public class CatFactory implements ProductFactoryInterface {
 
 	@Override
 	public ProductInterface create() {
-		System.out.println("Creating Cat.");
+		System.out.println("Creating cat.");
 		return new Cat();
 	}
 

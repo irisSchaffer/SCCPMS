@@ -1,13 +1,14 @@
 package sdm.sccpms.products;
 
-import sdm.sccpms.ProductInterface;
+import sdm.sccpms.Product;
 
-public class Cat implements ProductInterface {
+
+public class Cat extends Product {
 	public static final String ID = "cat";
-	
+
 	@Override
 	public String getName() {
-		return "Cat";
+		return ID;
 	}
 
 }

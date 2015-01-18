@@ -1,13 +1,17 @@
 package sdm.sccpms.products;
 
-import sdm.sccpms.ProductInterface;
+import sdm.sccpms.Product;
 
-public class TVSet implements ProductInterface {
+public class TVSet extends Product {
 	public static final String ID = "tv-set";
-	
+
 	@Override
 	public String getName() {
-		return "TVSet";
+		return ID;
 	}
-
+	
+	@Override
+	public String getDisplayName() {
+		return "TV Set";
+	}
 }

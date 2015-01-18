@@ -1,13 +1,13 @@
 package sdm.sccpms.products;
 
-import sdm.sccpms.ProductInterface;
+import sdm.sccpms.Product;
 
-public class KnittingSet implements ProductInterface {
+public class KnittingSet extends Product {
 	public static final String ID = "knitting-set";
-	
+
 	@Override
 	public String getName() {
-		return "Knitting Set";
+		return ID;
 	}
 
 }
