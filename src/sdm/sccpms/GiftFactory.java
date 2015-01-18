@@ -16,7 +16,7 @@ public class GiftFactory {
 		this.giftWraps = giftWraps;
 	}
 
-	public Gift createGift(String productId) throws UndefinedProductException {
+	public Gift createGift(String productId) {
 		if (! this.productFactories.containsKey(productId)) {
 			throw new UndefinedProductException(
 				String.format("No Product Factory is registered for the product id %s", productId)
@@ -29,9 +29,7 @@ public class GiftFactory {
 	}
 
 	private GiftWrap getGiftWrap() {
-		int index = (int) Math.round(Math.random() * this.giftWraps.size());
-		if (index >= this.giftWraps.size())
-			--index;
+		int index = (int) Math.round(Math.random() * (this.giftWraps.size() - 1));
 		return this.giftWraps.get(index);
 	}
 

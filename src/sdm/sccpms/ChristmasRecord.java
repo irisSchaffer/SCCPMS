@@ -7,11 +7,11 @@ public class ChristmasRecord {
 	private List<String> wishList;
 	private int year;
 
-	public ChristmasRecord(List<String> wishList) throws IllegalArgumentException {
+	public ChristmasRecord(List<String> wishList) {
 		this(wishList, Calendar.getInstance().get(Calendar.YEAR));
 	}
 
-	public ChristmasRecord(List<String> wishList, int year) throws IllegalArgumentException {
+	public ChristmasRecord(List<String> wishList, int year) {
 		this.year = year;
 		this.setWishList(wishList);
 	}
@@ -20,7 +20,7 @@ public class ChristmasRecord {
 		return wishList;
 	}
 
-	public void setWishList(List<String> wishList) throws IllegalArgumentException {
+	public void setWishList(List<String> wishList) {
 		if (wishList.size() < 1) {
 			throw new IllegalArgumentException("Can only add christmas records with wish lists of at least one wish.");
 		}
