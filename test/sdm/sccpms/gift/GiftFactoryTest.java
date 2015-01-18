@@ -1,4 +1,4 @@
-package sdm.sccpms;
+package sdm.sccpms.gift;
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
@@ -9,7 +9,11 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import sdm.sccpms.ProductFactoryInterface;
 import sdm.sccpms.exceptions.UndefinedProductException;
+import sdm.sccpms.gift.Gift;
+import sdm.sccpms.gift.GiftFactory;
+import sdm.sccpms.gift.GiftWrap;
 import sdm.sccpms.products.*;
 
 

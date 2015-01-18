@@ -1,4 +1,4 @@
-package sdm.sccpms;
+package sdm.sccpms.gift;
 
 public class GiftWrap {
 	public String color;

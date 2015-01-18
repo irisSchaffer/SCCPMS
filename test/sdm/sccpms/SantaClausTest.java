@@ -10,6 +10,8 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import sdm.sccpms.gift.GiftFactory;
+import sdm.sccpms.gift.GiftWrap;
 import sdm.sccpms.products.Bicycle;
 import sdm.sccpms.products.BicycleFactory;
 import sdm.sccpms.products.Cat;
@@ -57,6 +59,26 @@ public class SantaClausTest {
 	}
 	
 	@Test
+	public void testAddChristmasRecordForExistingChild() {
+		Child child = this.getChild();
+		this.santa.addChild(child);
+		
+		ChristmasRecord record = new ChristmasRecord(child.getWishList(), 2009);
+		this.santa.addChristmasRecordforChild(record, child);
+		
+		assertEquals(record, this.santa.getChildRecords().get(child).getChristmasRecordForYear(2009));
+	}
+	
+	public void testAddChristmasRecordForNewChild() {
+		Child child = this.getChild();
+		ChristmasRecord record = new ChristmasRecord(child.getWishList());
+		this.santa.addChristmasRecordforChild(record, child);
+		
+		assertNotNull(this.santa.getChildRecords().get(child));
+		assertEquals(record, this.santa.getChildRecords().get(child).getCurrentChristmasRecord());
+	}
+	
+	@Test
 	public void testOnWishListFinished() {
 		Child child = this.getChild();
 		this.santa.addChild(child);
@@ -67,7 +89,7 @@ public class SantaClausTest {
 	}
 	
 	private Child getChild() {
-		Child child = new Child("Max", "Street 9, 1001 City, Country");		
+		Child child = new Child("Max", "Street 9, 1001 City, Country");	
 		child.addToWishList("i-pod");		
 		child.addToWishList("cat");
 		

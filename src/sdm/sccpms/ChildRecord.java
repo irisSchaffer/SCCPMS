@@ -29,15 +29,15 @@ public class ChildRecord {
 		this.christmasRecords.put(christmasRecord.getYear(), christmasRecord);
 	}
 
-	public Object getCurrentChristmasRecord() {
+	public ChristmasRecord getCurrentChristmasRecord() {
 		return this.getChristmasRecordForYear(Calendar.getInstance().get(Calendar.YEAR));
 	}
 
-	public Object getChristmasRecordForYear(int year) {
+	public ChristmasRecord getChristmasRecordForYear(int year) {
 		return this.christmasRecords.get(year);
 	}
 	
-	public Object hasChristmasRecordForYear(int year) {
+	public boolean hasChristmasRecordForYear(int year) {
 		return this.christmasRecords.containsKey(year);
 	}
 }

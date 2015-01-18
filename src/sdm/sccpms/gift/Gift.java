@@ -1,4 +1,6 @@
-package sdm.sccpms;
+package sdm.sccpms.gift;
+
+import sdm.sccpms.ProductInterface;
 
 public class Gift {
 	public GiftWrap giftWrap;

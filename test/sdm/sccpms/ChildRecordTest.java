@@ -52,4 +52,10 @@ public class ChildRecordTest {
 	public void testGetChristmasRecordForYear() {
 		assertEquals(this.christmasRecord2009, this.childRecord.getChristmasRecordForYear(2009));
 	}
+	
+	@Test
+	public void testHasAndGetChristmasRecordForYearWithoutRecord() {
+		assertFalse(this.childRecord.hasChristmasRecordForYear(2000));
+		assertNull(this.childRecord.getChristmasRecordForYear(2000));
+	}
 }

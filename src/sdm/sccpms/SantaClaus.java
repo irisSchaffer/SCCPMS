@@ -4,6 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import sdm.sccpms.gift.Gift;
+import sdm.sccpms.gift.GiftFactory;
+
 public class SantaClaus implements WishGranterInterface {
 	private Map<Child, ChildRecord> childRecords;
 	private List<Gift> gifts;
