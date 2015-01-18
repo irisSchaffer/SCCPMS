@@ -4,12 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import sdm.sccpms.gift.Gift;
+import sdm.sccpms.exceptions.UnsupportedMethodException;
 
-/**
- * TODO: Add state pattern to child depending on if wish list has already been put on window sill or not.
- * @author iris
- *
- */
 public class Child {
 	public static final float INITIAL_GOODNESS = .5f;
 	public static final float GOODNESS_CHANGE = .1f;
@@ -23,8 +19,12 @@ public class Child {
 	private List<Gift> gifts;
 	private boolean hasPutOutCookiesAndMilk;
 	
+	private WishListClosedState wishListClosed = new WishListClosedState();
+	private WishListOpenState wishListOpen = new WishListOpenState();
+	public State childState = wishListOpen;
+	
 	public Child(String name, String address) {
-		this(name, address, Child.INITIAL_GOODNESS);
+		this(name, address, Child.INITIAL_GOODNESS);		
 	}
 	
 	public Child(String name, String address, float goodness) {
@@ -34,12 +34,18 @@ public class Child {
 		this.gifts = new LinkedList<Gift>();
 		this.hasPutOutCookiesAndMilk = false;
 	}
-	
+
 	public List<String> getWishList() {
 		return wishList;
 	}
 	
 	public void addToWishList(String wish) {
+		if (! this.childState.canUseAddToWishListMethod()) {
+			throw new UnsupportedMethodException(
+				String.format("addToWishList method can't be called!")
+			);
+		}
+		
 		this.wishList.add(wish);
 	}
 	
@@ -109,17 +115,43 @@ public class Child {
 	public boolean isFinishedWishList() {
 		return finishedWishList;
 	}
+
+	public State getChildState() {
+		return childState;
+	}
+
+	public void setChildState(State childState) {
+		this.childState = childState;
+	}
 	
 	public List<String> takeWishList() {
-		List<String> wishList = this.wishList;
+		if (! this.childState.canUseTakeWishListMethod()) {
+			throw new UnsupportedMethodException(
+				String.format("takeWishList method can't be called!")
+			);
+		}
+		
+		List<String> wishList = new LinkedList<String>(this.wishList);		
 		this.wishList.clear();
+				
+		this.changeState();
 		
 		return wishList;
 	}
 
-	public void putWishListOnWindowSill() {		
+	public void putWishListOnWindowSill() {	
+		// state not changed for showing exception
+		this.changeState();
+		
 		this.finishedWishList = true;
 		this.wishGranter.onWishListFinished(this);
+	}
+	
+	public void changeState() {
+		if (this.childState == this.wishListClosed)
+			this.setChildState(this.wishListOpen);
+		else
+			this.setChildState(this.wishListClosed);
 	}
 
 	public boolean hasPutOutCookiesAndMilk() {
@@ -164,5 +196,4 @@ public class Child {
 	public String toString() {
 		return this.getName() + " living at " + this.getAddress();
 	}
-
 }

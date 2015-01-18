@@ -13,6 +13,7 @@ import org.junit.Test;
 import sdm.sccpms.gift.BinaryGiftGivingStrategy;
 import sdm.sccpms.gift.GiftFactory;
 import sdm.sccpms.gift.GiftWrap;
+import sdm.sccpms.exceptions.UnsupportedMethodException;
 import sdm.sccpms.products.Bicycle;
 import sdm.sccpms.products.BicycleFactory;
 import sdm.sccpms.products.Cat;
@@ -26,8 +27,6 @@ import sdm.sccpms.products.LaptopFactory;
 import sdm.sccpms.products.TVSet;
 import sdm.sccpms.products.TVSetFactory;
 
-
-
 public class SantaClausTest {	
 	SantaClaus santa;
 	GiftFactory giftFactory;
@@ -35,6 +34,10 @@ public class SantaClausTest {
 
 	@Before
 	public void init() {
+		this.child = new Child("Max", "Street 9, 1001 City, Country");		
+		this.child.addToWishList(IPod.ID);		
+		this.child.addToWishList(Cat.ID);	
+		
 		Map<String, ProductFactoryInterface> productFactories = new HashMap<String, ProductFactoryInterface>();
 		productFactories.put(IPod.ID, new IPodFactory());
 		productFactories.put(Bicycle.ID, new BicycleFactory());
@@ -48,9 +51,8 @@ public class SantaClausTest {
 		giftWraps.add(new GiftWrap("green", "yellow stripes"));
 		
 		this.giftFactory = new GiftFactory(productFactories, giftWraps);
-		this.child = this.getChild();
-		
-		this.santa = new SantaClaus(giftFactory, new BinaryGiftGivingStrategy());				
+
+		this.santa = new SantaClaus(giftFactory, new BinaryGiftGivingStrategy());						
 	}
 	
 	@Test
@@ -97,13 +99,5 @@ public class SantaClausTest {
 		this.santa.deliverGifts();
 		assertEquals(2, this.child.getGifts().size());
 		assertEquals(0, this.santa.getGifts().size());
-	}
-	
-	private Child getChild() {
-		Child child = new Child("Max", "Street 9, 1001 City, Country");	
-		child.addToWishList(IPod.ID);		
-		child.addToWishList(Cat.ID);
-		
-		return child;
 	}
 }

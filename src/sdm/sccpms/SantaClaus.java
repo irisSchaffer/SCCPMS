@@ -31,10 +31,10 @@ public class SantaClaus implements WishGranterInterface {
 	
 	@Override
 	public void onWishListFinished(Child child) {
-		ChristmasRecord christmasRecord = new ChristmasRecord(child.getWishList(), child.getGoodness());
+		ChristmasRecord christmasRecord = new ChristmasRecord(child.takeWishList(), child.getGoodness());
 		this.addChristmasRecordforChild(christmasRecord, child);
 		
-		for (String wish: child.getWishList()) {
+		for (String wish: christmasRecord.getWishList()) {
 			this.gifts.add(this.giftFactory.createGift(wish, child));
 		}
 	}
