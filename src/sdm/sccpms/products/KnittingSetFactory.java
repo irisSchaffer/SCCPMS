@@ -7,7 +7,7 @@ public class KnittingSetFactory implements ProductFactoryInterface {
 
 	@Override
 	public ProductInterface create() {
-		System.out.println("Creating knitting set");
+		System.out.println("Elf Iris is trying out knitting set");
 		return new KnittingSet();
 	}
 

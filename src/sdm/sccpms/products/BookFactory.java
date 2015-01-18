@@ -3,17 +3,17 @@ package sdm.sccpms.products;
 import sdm.sccpms.ProductFactoryInterface;
 import sdm.sccpms.ProductInterface;
 
-public class CatFactory implements ProductFactoryInterface {
+public class BookFactory implements ProductFactoryInterface {
 
 	@Override
 	public ProductInterface create() {
-		System.out.println("Creating cat.");
-		return new Cat();
+		System.out.println("Writing book.");
+		return new Book();
 	}
 
 	@Override
 	public String getCreatedProductId() {
-		return Cat.ID;
+		return Book.ID;
 	}
 
 }

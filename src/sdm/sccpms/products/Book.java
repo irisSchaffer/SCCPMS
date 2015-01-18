@@ -3,8 +3,8 @@ package sdm.sccpms.products;
 import sdm.sccpms.Product;
 
 
-public class Cat extends Product {
-	public static final String ID = "cat";
+public class Book extends Product {
+	public static final String ID = "book";
 
 	@Override
 	public String getName() {

@@ -15,8 +15,8 @@ import sdm.sccpms.gift.GiftFactory;
 import sdm.sccpms.gift.GiftWrap;
 import sdm.sccpms.products.Bicycle;
 import sdm.sccpms.products.BicycleFactory;
-import sdm.sccpms.products.Cat;
-import sdm.sccpms.products.CatFactory;
+import sdm.sccpms.products.Book;
+import sdm.sccpms.products.BookFactory;
 import sdm.sccpms.products.IPod;
 import sdm.sccpms.products.IPodFactory;
 import sdm.sccpms.products.KnittingSet;
@@ -27,7 +27,7 @@ import sdm.sccpms.products.TVSet;
 import sdm.sccpms.products.TVSetFactory;
 
 public class SantaClausTest {	
-	SantaClaus santa;
+	SantaClausHQ santa;
 	GiftFactory giftFactory;
 	private Child child;
 
@@ -35,12 +35,12 @@ public class SantaClausTest {
 	public void init() {
 		this.child = new Child("Max", "Street 9, 1001 City, Country");		
 		this.child.addToWishList(IPod.ID);		
-		this.child.addToWishList(Cat.ID);	
+		this.child.addToWishList(Book.ID);	
 		
 		Map<String, ProductFactoryInterface> productFactories = new HashMap<String, ProductFactoryInterface>();
 		productFactories.put(IPod.ID, new IPodFactory());
 		productFactories.put(Bicycle.ID, new BicycleFactory());
-		productFactories.put(Cat.ID, new CatFactory());
+		productFactories.put(Book.ID, new BookFactory());
 		productFactories.put(KnittingSet.ID, new KnittingSetFactory());
 		productFactories.put(Laptop.ID, new LaptopFactory());
 		productFactories.put(TVSet.ID, new TVSetFactory());
@@ -51,14 +51,14 @@ public class SantaClausTest {
 		
 		this.giftFactory = new GiftFactory(productFactories, giftWraps);
 
-		this.santa = new SantaClaus(giftFactory, new BinaryGiftGivingStrategy());						
+		this.santa = new SantaClausHQ(giftFactory, new BinaryGiftGivingStrategy());						
 	}
 	
 	@Test
 	public void testAddChild() {
 		this.santa.addChild(child);
 		assertEquals(1, this.santa.getChildRecords().size());
-		assertTrue(child.getWishGranter() instanceof SantaClaus);
+		assertTrue(child.getWishGranter() instanceof SantaClausHQ);
 	}
 	
 	@Test

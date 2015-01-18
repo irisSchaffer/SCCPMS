@@ -7,7 +7,7 @@ public class TVSetFactory implements ProductFactoryInterface {
 
 	@Override
 	public ProductInterface create() {
-		System.out.println("Creating tv set.");
+		System.out.println("12-year-old chinese elf is assembling tv set.");
 		return new TVSet();
 	}
 

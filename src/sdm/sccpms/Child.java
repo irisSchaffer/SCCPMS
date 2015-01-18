@@ -44,6 +44,7 @@ public class Child {
 	}
 	
 	public void addToWishList(String wish) {
+		System.out.format("%s adds item '%s' to wish list\n", this.getName(), wish);
 		this.wishList.add(wish);
 	}
 	
@@ -75,6 +76,8 @@ public class Child {
 		} else {
 			this.goodness = goodness;			
 		}
+		
+		System.out.format("%s's goodness was adjusted: %d%%\n", this.getName(), Math.round(this.getGoodness() * 100));
 	}
 
 	public String getName() {
@@ -92,14 +95,29 @@ public class Child {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
+	public boolean hasPutOutCookiesAndMilk() {
+		return this.hasPutOutCookiesAndMilk;
+	}
+	
+	public void putOutCookiesAndMilk() {
+		System.out.format("%s puts cookies and milk out.\n", this.getName());
+		this.hasPutOutCookiesAndMilk = true;
+	}
 
 	public List<Gift> getGifts() {
 		return gifts;
 	}
 
-	public void addGift(Gift gift) {
-		System.out.println(String.format("%s receives %s", this.getName(), gift));
-		this.gifts.add(gift);
+	public void receiveGifts(List<Gift> gifts) {
+		if (0 == gifts.size()) {
+			System.out.format("%s doesn't get any gifts this year :(\n", this.getName());
+		}
+		
+		for (Gift gift: gifts) {
+			System.out.format("%s receives %s.\n", this.getName(), gift);
+			this.gifts.add(gift);			
+		}
 	}
 
 	public WishGranterInterface getWishGranter() {
@@ -110,16 +128,9 @@ public class Child {
 		this.wishGranter = wishGranter;
 	}
 
-	public void putWishListOnWindowSill() {	
+	public void putWishListOnWindowSill() {
+		System.out.format("%s puts wish list on window sill.\n", this.getName());
 		this.wishGranter.onWishListFinished(this);
-	}
-
-	public boolean hasPutOutCookiesAndMilk() {
-		return this.hasPutOutCookiesAndMilk;
-	}
-	
-	public void putOutCookiesAndMild() {
-		this.hasPutOutCookiesAndMilk = true;
 	}
 
 	@Override

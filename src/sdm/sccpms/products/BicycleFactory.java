@@ -7,7 +7,7 @@ public class BicycleFactory implements ProductFactoryInterface {
 
 	@Override
 	public ProductInterface create() {
-		System.out.println("Creating bicycle.");
+		System.out.println("Assembling bicycle.");
 		return new Bicycle();
 	}
 

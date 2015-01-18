@@ -7,7 +7,7 @@ public class IPodFactory implements ProductFactoryInterface {
 
 	@Override
 	public ProductInterface create() {
-		System.out.println("Creating iPod.");
+		System.out.println("Loading music on iPod.");
 		return new IPod();
 	}
 

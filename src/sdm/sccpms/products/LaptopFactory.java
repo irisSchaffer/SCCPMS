@@ -7,7 +7,7 @@ public class LaptopFactory implements ProductFactoryInterface {
 
 	@Override
 	public ProductInterface create() {
-		System.out.println("Creating laptop.");
+		System.out.println("Elf called Areen is setting up laptop.");
 		return new Laptop();
 	}
 

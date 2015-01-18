@@ -8,13 +8,13 @@ import sdm.sccpms.gift.Gift;
 import sdm.sccpms.gift.GiftFactory;
 import sdm.sccpms.gift.GiftGivingStrategyInterface;
 
-public class SantaClaus implements WishGranterInterface {
+public class SantaClausHQ implements WishGranterInterface {
 	private Map<Child, ChildRecord> childRecords;
 	private List<Gift> gifts;
 	private GiftFactory giftFactory;
 	private GiftGivingStrategyInterface giftGivingStrategy;
 
-	public SantaClaus(GiftFactory giftFactory, GiftGivingStrategyInterface giftGivingStrategy) {		
+	public SantaClausHQ(GiftFactory giftFactory, GiftGivingStrategyInterface giftGivingStrategy) {		
 		this.giftFactory = giftFactory;
 		this.giftGivingStrategy = giftGivingStrategy;
 		this.childRecords = new HashMap<Child, ChildRecord>();
@@ -31,10 +31,13 @@ public class SantaClaus implements WishGranterInterface {
 	
 	@Override
 	public void onWishListFinished(Child child) {
+		System.out.format("Santa Clause takes %s's wish list.\n", child.getName());
 		ChristmasRecord christmasRecord = new ChristmasRecord(child.takeWishList());
 		this.addChristmasRecordforChild(christmasRecord, child);
 		
+		System.out.format("\nElfs work on gifts for %s:\n", child.getName());
 		for (String wish: christmasRecord.getWishList()) {
+			System.out.print(" - ");
 			this.gifts.add(this.giftFactory.createGift(wish, child));
 		}
 	}
@@ -49,6 +52,8 @@ public class SantaClaus implements WishGranterInterface {
 	}
 	
 	public void deliverGifts() {
+		this.putGiftsOnSleigh();
+		
 		for (Map.Entry<Child, ChildRecord> entry: this.childRecords.entrySet()) {
 			if( null != entry.getValue().getCurrentChristmasRecord()) {
 				ChildRecord childRecord = entry.getValue();
@@ -59,8 +64,12 @@ public class SantaClaus implements WishGranterInterface {
 		this.gifts.clear();
 	}
 
+	private void putGiftsOnSleigh() {
+		System.out.println("Putting all gifts on sleigh.");
+	}
+
 	private void deliverGiftsForChild(Child child, ChristmasRecord christmasRecord) {
-		this.flyToAddress(child.getAddress());
+		this.sendSantaToAddress(child.getAddress());
 		
 		if (child.hasPutOutCookiesAndMilk()) {
 			child.doGood();
@@ -71,13 +80,11 @@ public class SantaClaus implements WishGranterInterface {
 		List<Gift> gifts = this.findGiftsForChild(child);
 		gifts = this.giftGivingStrategy.getGifts(gifts, christmasRecord.getGoodness());
 		
-		for (Gift gift: gifts) {
-			child.addGift(gift);
-		}
+		child.receiveGifts(gifts);
 	}
 
-	private void flyToAddress(String address) {
-		System.out.println(String.format("Santa Claus is flying to %s", address));
+	private void sendSantaToAddress(String address) {
+		System.out.format("\nSanta Claus is flying to %s\n", address);
 	}
 	
 	private List<Gift> findGiftsForChild(Child child) {
