@@ -13,7 +13,6 @@ import org.junit.Test;
 import sdm.sccpms.gift.BinaryGiftGivingStrategy;
 import sdm.sccpms.gift.GiftFactory;
 import sdm.sccpms.gift.GiftWrap;
-import sdm.sccpms.exceptions.UnsupportedMethodException;
 import sdm.sccpms.products.Bicycle;
 import sdm.sccpms.products.BicycleFactory;
 import sdm.sccpms.products.Cat;
@@ -66,7 +65,7 @@ public class SantaClausTest {
 	public void testAddChristmasRecordForExistingChild() {
 		this.santa.addChild(child);
 		
-		ChristmasRecord record = new ChristmasRecord(child.getWishList(), child.getGoodness(), 2009);
+		ChristmasRecord record = new ChristmasRecord(child.getWishList(), 2009);
 		this.santa.addChristmasRecordforChild(record, child);
 		
 		assertEquals(record, this.santa.getChildRecords().get(child).getChristmasRecordForYear(2009));
@@ -74,7 +73,7 @@ public class SantaClausTest {
 	
 	@Test
 	public void testAddChristmasRecordForNewChild() {
-		ChristmasRecord record = new ChristmasRecord(child.getWishList(), child.getGoodness());
+		ChristmasRecord record = new ChristmasRecord(child.getWishList());
 		this.santa.addChristmasRecordforChild(record, child);
 		
 		assertNotNull(this.santa.getChildRecords().get(child));
@@ -83,11 +82,12 @@ public class SantaClausTest {
 	
 	@Test
 	public void testOnWishListFinished() {
-		this.santa.addChild(child);
+		this.santa.addChild(this.child);
 		
-		child.putWishListOnWindowSill();
+		this.child.putWishListOnWindowSill();
 		
 		assertTrue(this.santa.getGifts().size() > 0);
+		assertEquals(0, this.child.getWishList().size());
 	}
 	
 	@Test

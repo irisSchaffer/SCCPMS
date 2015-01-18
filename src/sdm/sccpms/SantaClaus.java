@@ -31,7 +31,7 @@ public class SantaClaus implements WishGranterInterface {
 	
 	@Override
 	public void onWishListFinished(Child child) {
-		ChristmasRecord christmasRecord = new ChristmasRecord(child.takeWishList(), child.getGoodness());
+		ChristmasRecord christmasRecord = new ChristmasRecord(child.takeWishList());
 		this.addChristmasRecordforChild(christmasRecord, child);
 		
 		for (String wish: christmasRecord.getWishList()) {
@@ -51,26 +51,29 @@ public class SantaClaus implements WishGranterInterface {
 	public void deliverGifts() {
 		for (Map.Entry<Child, ChildRecord> entry: this.childRecords.entrySet()) {
 			if( null != entry.getValue().getCurrentChristmasRecord()) {
-				Child child = entry.getValue().getChild();
-				ChristmasRecord christmasRecord = entry.getValue().getCurrentChristmasRecord();				
-				
-				this.flyToAddress(child.getAddress());
-				
-				if (child.hasPutOutCookiesAndMilk()) {
-					child.doGood();
-					christmasRecord.setGoodness(child.getGoodness());
-				}
-				
-				List<Gift> gifts = this.findGiftsForChild(child);
-				gifts = this.giftGivingStrategy.getGifts(gifts, christmasRecord.getGoodness());
-				
-				for (Gift gift: gifts) {
-					child.addGift(gift);
-				}
+				ChildRecord childRecord = entry.getValue();
+				deliverGiftsForChild(childRecord.getChild(), childRecord.getCurrentChristmasRecord());
 			}
 		}
 		
 		this.gifts.clear();
+	}
+
+	private void deliverGiftsForChild(Child child, ChristmasRecord christmasRecord) {
+		this.flyToAddress(child.getAddress());
+		
+		if (child.hasPutOutCookiesAndMilk()) {
+			child.doGood();
+		}
+		
+		christmasRecord.setGoodness(child.getGoodness());
+		
+		List<Gift> gifts = this.findGiftsForChild(child);
+		gifts = this.giftGivingStrategy.getGifts(gifts, christmasRecord.getGoodness());
+		
+		for (Gift gift: gifts) {
+			child.addGift(gift);
+		}
 	}
 
 	private void flyToAddress(String address) {

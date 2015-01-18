@@ -8,18 +8,17 @@ public class ChristmasRecord {
 	private int year;
 	private float goodness;
 
-	public ChristmasRecord(List<String> wishList, float goodness) {
-		this(wishList, goodness, Calendar.getInstance().get(Calendar.YEAR));
+	public ChristmasRecord(List<String> wishList) {
+		this(wishList, Calendar.getInstance().get(Calendar.YEAR));
 	}
 
-	public ChristmasRecord(List<String> wishList, float goodness, int year) {
+	public ChristmasRecord(List<String> wishList, int year) {
 		if (wishList.size() < 1) {
 			throw new IllegalArgumentException("Can only add christmas records with wish lists of at least one wish.");
 		}
 		
 		this.wishList = wishList;
 		this.year = year;
-		this.goodness = goodness;
 	}
 
 	public List<String> getWishList() {

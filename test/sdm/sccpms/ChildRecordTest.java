@@ -24,13 +24,13 @@ public class ChildRecordTest {
 		
 		this.wishList2009 = new LinkedList<String>();
 		this.wishList2009.add("bicycle");
-		this.christmasRecord2009 = new ChristmasRecord(this.wishList2009, child.getGoodness(), 2009);
+		this.christmasRecord2009 = new ChristmasRecord(this.wishList2009, 2009);
 		this.childRecord.addChristmasRecord(this.christmasRecord2009);
 
 		this.currentWishList = new LinkedList<String>();
 		this.currentWishList.add("tv-set");
 		this.currentWishList.add("cat");
-		this.currentChristmasRecord = new ChristmasRecord(this.currentWishList, child.getGoodness());
+		this.currentChristmasRecord = new ChristmasRecord(this.currentWishList);
 		this.childRecord.addChristmasRecord(this.currentChristmasRecord);
 	}
 
@@ -38,7 +38,7 @@ public class ChildRecordTest {
 	public void testAddChristmasRecordForSameYearTwice() {
 		List<String> wishList = new LinkedList<String>();
 		wishList.add("test-wish");
-		ChristmasRecord christmasRecord = new ChristmasRecord(wishList, 2009);
+		ChristmasRecord christmasRecord = new ChristmasRecord(wishList);
 
 		this.childRecord.addChristmasRecord(christmasRecord);
 	}

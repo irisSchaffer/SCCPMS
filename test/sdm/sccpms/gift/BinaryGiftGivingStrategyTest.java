@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import sdm.sccpms.Child;
 import sdm.sccpms.products.Bicycle;
-import sdm.sccpms.products.BicycleFactory;
 
 public class BinaryGiftGivingStrategyTest {
 

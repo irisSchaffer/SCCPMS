@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import sdm.sccpms.gift.Gift;
-import sdm.sccpms.exceptions.UnsupportedMethodException;
 
 public class Child {
 	public static final float INITIAL_GOODNESS = .5f;
@@ -13,16 +12,12 @@ public class Child {
 	private String name;
 	private String address;
 	private float goodness;
-	private boolean finishedWishList = false;
-	private List<String> wishList = new LinkedList<String>();
-	private WishGranterInterface wishGranter;
-	private List<Gift> gifts;
 	private boolean hasPutOutCookiesAndMilk;
 	
-	private WishListClosedState wishListClosed = new WishListClosedState();
-	private WishListOpenState wishListOpen = new WishListOpenState();
-	public State childState = wishListOpen;
-	
+	private List<String> wishList;
+	private List<Gift> gifts;
+	private WishGranterInterface wishGranter;
+		
 	public Child(String name, String address) {
 		this(name, address, Child.INITIAL_GOODNESS);		
 	}
@@ -31,6 +26,8 @@ public class Child {
 		this.name = name;
 		this.address = address;
 		this.goodness = goodness;
+		
+		this.wishList = new LinkedList<String>();
 		this.gifts = new LinkedList<Gift>();
 		this.hasPutOutCookiesAndMilk = false;
 	}
@@ -39,13 +36,14 @@ public class Child {
 		return wishList;
 	}
 	
-	public void addToWishList(String wish) {
-		if (! this.childState.canUseAddToWishListMethod()) {
-			throw new UnsupportedMethodException(
-				String.format("addToWishList method can't be called!")
-			);
-		}
+	public List<String> takeWishList() {
+		List<String> wishList = (List<String>) ((LinkedList<String>) this.wishList).clone();
+		this.wishList.clear();
 		
+		return wishList;
+	}
+	
+	public void addToWishList(String wish) {
 		this.wishList.add(wish);
 	}
 	
@@ -112,46 +110,8 @@ public class Child {
 		this.wishGranter = wishGranter;
 	}
 
-	public boolean isFinishedWishList() {
-		return finishedWishList;
-	}
-
-	public State getChildState() {
-		return childState;
-	}
-
-	public void setChildState(State childState) {
-		this.childState = childState;
-	}
-	
-	public List<String> takeWishList() {
-		if (! this.childState.canUseTakeWishListMethod()) {
-			throw new UnsupportedMethodException(
-				String.format("takeWishList method can't be called!")
-			);
-		}
-		
-		List<String> wishList = new LinkedList<String>(this.wishList);		
-		this.wishList.clear();
-				
-		this.changeState();
-		
-		return wishList;
-	}
-
 	public void putWishListOnWindowSill() {	
-		// state not changed for showing exception
-		this.changeState();
-		
-		this.finishedWishList = true;
 		this.wishGranter.onWishListFinished(this);
-	}
-	
-	public void changeState() {
-		if (this.childState == this.wishListClosed)
-			this.setChildState(this.wishListOpen);
-		else
-			this.setChildState(this.wishListClosed);
 	}
 
 	public boolean hasPutOutCookiesAndMilk() {

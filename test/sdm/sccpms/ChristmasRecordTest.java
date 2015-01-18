@@ -15,20 +15,18 @@ public class ChristmasRecordTest {
 	@Test
 	public void testConstructors() {
 		List<String> wishList = this.getWishList();
-		this.record = new ChristmasRecord(wishList, 1f);
+		this.record = new ChristmasRecord(wishList);
 		assertEquals(wishList, this.record.getWishList());
-		assertEquals(1f, this.record.getGoodness(), 0.0f);
 		assertEquals(Calendar.getInstance().get(Calendar.YEAR), this.record.getYear());
 		
-		this.record = new ChristmasRecord(wishList, .5f, 2009);
+		this.record = new ChristmasRecord(wishList, 2009);
 		assertEquals(wishList, this.record.getWishList());
-		assertEquals(.5f, this.record.getGoodness(), 0.0f);
 		assertEquals(2009, this.record.getYear());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testConstructionWithEmptyWishList() {
-		this.record = new ChristmasRecord(new LinkedList<String>(), 1f);
+		this.record = new ChristmasRecord(new LinkedList<String>());
 	}
 	
 	private List<String> getWishList() {
