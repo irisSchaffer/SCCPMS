@@ -25,9 +25,7 @@ import sdm.sccpms.products.TVSetFactory;
 
 
 
-public class SantaClausTest {
-	Child child;
-	
+public class SantaClausTest {	
 	SantaClaus santa;
 	GiftFactory giftFactory;
 
@@ -45,21 +43,34 @@ public class SantaClausTest {
 		giftWraps.add(new GiftWrap("blue", "white dots"));
 		giftWraps.add(new GiftWrap("green", "yellow stripes"));
 		
-		this.giftFactory = new GiftFactory(productFactories, giftWraps);
+		this.giftFactory = new GiftFactory(productFactories, giftWraps);		
 		
-		this.child = new Child("Max", "Street 9, 1001 City, Country");		
-		this.child.addToWishList("i-pod");		
-		this.child.addToWishList("cat");		
-		
-		this.santa = new SantaClaus(giftFactory);
-		this.santa.addChild(child);
-		this.child.setWishGranter(this.santa);
-		
-		this.child.putWishListOnWindowSill();				
+		this.santa = new SantaClaus(giftFactory);				
 	}
 	
 	@Test
-	public void testIsWishGranted() {
-		assertTrue(this.santa.isWishGranted());
-	}	
+	public void testAddChild() {
+		Child child = this.getChild();
+		this.santa.addChild(child);
+		assertEquals(1, this.santa.getChildRecords().size());
+		assertTrue(child.getWishGranter() instanceof SantaClaus);
+	}
+	
+	@Test
+	public void testOnWishListFinished() {
+		Child child = this.getChild();
+		this.santa.addChild(child);
+		
+		child.putWishListOnWindowSill();
+		
+		assertTrue(this.santa.getGifts().size() > 0);
+	}
+	
+	private Child getChild() {
+		Child child = new Child("Max", "Street 9, 1001 City, Country");		
+		child.addToWishList("i-pod");		
+		child.addToWishList("cat");
+		
+		return child;
+	}
 }

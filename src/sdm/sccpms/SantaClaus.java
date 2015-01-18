@@ -8,7 +8,6 @@ public class SantaClaus implements WishGranterInterface {
 	private Map<Child, ChildRecord> childRecords;
 	private List<Gift> gifts;
 	private GiftFactory giftFactory;
-	private boolean wishGranted;
 
 	public SantaClaus(GiftFactory giftFactory) {		
 		this.giftFactory = giftFactory;
@@ -27,6 +26,7 @@ public class SantaClaus implements WishGranterInterface {
 		if (! this.childRecords.containsKey(child)) {
 			ChildRecord cr = new ChildRecord(child);
 			this.childRecords.put(child, cr);
+			child.setWishGranter(this);
 		}
 	}
 	
@@ -39,9 +39,7 @@ public class SantaClaus implements WishGranterInterface {
 			
 			for (String wish: child.getWishList()) {								
 				this.gifts.add(this.giftFactory.createGift(wish));
-			}
-			
-			this.wishGranted = true;
+			}			
 		}
 	}
 	
@@ -53,16 +51,16 @@ public class SantaClaus implements WishGranterInterface {
 		ChildRecord childRecord = this.childRecords.get(child);
 		childRecord.addChristmasRecord(christmasRecord);
 	}
-
-	public boolean isWishGranted() {
-		return wishGranted;
-	}
-
-	public void setWishGranted(boolean wishGranted) {
-		this.wishGranted = wishGranted;
+	
+	public List<Gift> getGifts() {
+		return this.gifts;
 	}
 
 	public void setGiftFactory(GiftFactory giftFactory) {
 		this.giftFactory = giftFactory;
+	}
+
+	public Map<Child, ChildRecord> getChildRecords() {
+		return this.childRecords;
 	}
 } 
