@@ -87,6 +87,7 @@ public class SantaClausTest {
 		assertTrue(this.santa.getGifts().size() > 0);
 	}
 	
+	@Test
 	public void testDeliverGifts() {
 		this.child.setGoodness(1f);
 		this.santa.addChild(this.child);
