@@ -10,7 +10,6 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import sdm.sccpms.exceptions.UndefinedProductException;
 import sdm.sccpms.exceptions.UnsupportedMethodException;
 import sdm.sccpms.products.Bicycle;
 import sdm.sccpms.products.BicycleFactory;

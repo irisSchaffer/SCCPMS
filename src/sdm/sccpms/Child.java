@@ -40,7 +40,7 @@ public class Child {
 	}
 	
 	public void addToWishList(String wish) {
-		if (this.childState == this.wishListClosed) {
+		if (! this.childState.canUseAddToWishListMethod()) {
 			throw new UnsupportedMethodException(
 				String.format("addToWishList method can't be called!")
 			);
@@ -116,6 +116,12 @@ public class Child {
 	}
 	
 	public List<String> takeWishList() {
+		if (! this.childState.canUseTakeWishListMethod()) {
+			throw new UnsupportedMethodException(
+				String.format("takeWishList method can't be called!")
+			);
+		}
+		
 		List<String> wishList = new LinkedList<String>(this.wishList);		
 		this.wishList.clear();
 				
@@ -124,12 +130,12 @@ public class Child {
 		return wishList;
 	}
 
-	public void putWishListOnWindowSill() {		
+	public void putWishListOnWindowSill() {	
+		// state not changed for showing exception
+		this.changeState();
+		
 		this.finishedWishList = true;
 		this.wishGranter.onWishListFinished(this);
-		
-		// state not changed for showing exception
-		// this.changeState();
 	}	
 	
 	public void changeState() {
