@@ -1,5 +1,5 @@
 # SCCPMS
-Santa Claus Christmas Management System (Software Design Methods Project)
+Santa Claus Christmas Present Management System (Software Design Methods Project)
 
 ## Project Description
 
