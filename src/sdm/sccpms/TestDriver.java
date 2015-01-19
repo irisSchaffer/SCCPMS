@@ -7,6 +7,9 @@ import java.util.Map;
 
 import sdm.sccpms.child.Child;
 import sdm.sccpms.child.ChildCreator;
+import sdm.sccpms.child.WishListStateFactoryInterface;
+import sdm.sccpms.child.wishListStates.WishListClosedStateFactory;
+import sdm.sccpms.child.wishListStates.WishListOpenStateFactory;
 import sdm.sccpms.gift.BinaryGiftGivingStrategy;
 import sdm.sccpms.gift.GiftFactory;
 import sdm.sccpms.gift.GiftGivingStrategyInterface;
@@ -16,16 +19,12 @@ import sdm.sccpms.products.*;
 public class TestDriver {
 	
 	public static void main(String[] args) {
-		Map<String, ProductFactoryInterface> productFactories = getProductFactories();
-		List<GiftWrap> giftWraps = getGiftWraps();
+		WishListStateFactoryInterface openWishListState = new WishListOpenStateFactory();
+		WishListStateFactoryInterface closedWishListState = new WishListClosedStateFactory();
 		
-		GiftFactory giftFactory = new GiftFactory(productFactories, giftWraps);
+		SantaClausHQ santaHQ = new SantaClausHQ(createGiftFactory(), new BinaryGiftGivingStrategy());
 		
-		GiftGivingStrategyInterface giftGivingStrategy = new BinaryGiftGivingStrategy();
-		
-		SantaClausHQ santaHQ = new SantaClausHQ(giftFactory, giftGivingStrategy);
-		
-		ChildCreator creator = new ChildCreator(santaHQ);
+		ChildCreator creator = new ChildCreator(santaHQ, openWishListState, closedWishListState);
 		
 		Child tim = creator.create("Tim", "Street 10, AA1 BB23 City, UK");
 		Child chloe = creator.create("Chloé", "Rue 945, 12345 Ville, France", 0.0f);
@@ -79,6 +78,10 @@ public class TestDriver {
 		santaHQ.deliverGifts();
 	}
 	
+	private static GiftFactory createGiftFactory() {
+		return new GiftFactory(getProductFactories(), getGiftWraps());
+	}
+
 	private static Map<String, ProductFactoryInterface> getProductFactories() {
 		Map<String, ProductFactoryInterface> productFactories = new HashMap<String, ProductFactoryInterface>();
 		productFactories.put(IPod.ID, new IPodFactory());

@@ -12,6 +12,8 @@ import org.junit.Test;
 
 import sdm.sccpms.ProductFactoryInterface;
 import sdm.sccpms.SantaClausHQ;
+import sdm.sccpms.child.wishListStates.WishListClosedState;
+import sdm.sccpms.child.wishListStates.WishListOpenState;
 import sdm.sccpms.gift.BinaryGiftGivingStrategy;
 import sdm.sccpms.gift.GiftFactory;
 import sdm.sccpms.gift.GiftWrap;

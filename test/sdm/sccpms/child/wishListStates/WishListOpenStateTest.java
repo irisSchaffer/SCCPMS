@@ -1,4 +1,4 @@
-package sdm.sccpms.child;
+package sdm.sccpms.child.wishListStates;
 
 import static org.junit.Assert.*;
 
@@ -8,38 +8,40 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import sdm.sccpms.child.ChildProxy;
+import sdm.sccpms.child.WishListState;
+import sdm.sccpms.child.wishListStates.WishListClosedState;
+import sdm.sccpms.child.wishListStates.WishListOpenState;
 import sdm.sccpms.products.Bicycle;
 import sdm.sccpms.products.IPod;
 
-public class WishListClosedStateTest {
+public class WishListOpenStateTest {
 	ChildProxy child;
 	
 	@Before
 	public void init() {
-		this.child = new ChildProxy("Alex", "Address");
+		this.child = new ChildProxy("Tom", "Address");
 		WishListState openState = new WishListOpenState(child);
 		WishListState closeState = new WishListClosedState(child);
 		this.child.setWishListClosedState(closeState);
 		this.child.setWishListOpenState(openState);
-		this.child.setWishListState(this.child.getWishListClosedState());
+		this.child.setWishListState(this.child.getWishListOpenState());
 	}
 	
-	@Test(expected=IllegalStateException.class)
+	@Test
 	public void testAddToWishList() {
 		this.child.addToWishList(IPod.ID);
+		assertEquals(1, this.child.getWishList().size());
 	}
 	
 	@Test(expected=IllegalStateException.class)
+	public void testTakeWishList() {
+		List<String> wishList = this.child.takeWishList();
+	}
+	
+	@Test
 	public void testPutWishListOnWindowSill() {
 		this.child.putWishListOnWindowSill();
-	}
-
-	@Test
-	public void testTakeWishList() {
-		this.child.getWishList().add(Bicycle.ID);
-		List<String> wishList = this.child.takeWishList();
-		assertEquals(1, wishList.size());
-		assertEquals(0, this.child.getWishList().size());
-		assertTrue(this.child.getWishListState() instanceof WishListOpenState);
+		assertTrue(this.child.getWishListState() instanceof WishListClosedState);
 	}
 }

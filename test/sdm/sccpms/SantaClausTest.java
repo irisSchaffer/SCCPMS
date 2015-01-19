@@ -12,8 +12,10 @@ import org.junit.Test;
 
 import sdm.sccpms.child.Child;
 import sdm.sccpms.child.ChildCreator;
-import sdm.sccpms.child.WishListClosedState;
-import sdm.sccpms.child.WishListOpenState;
+import sdm.sccpms.child.wishListStates.WishListClosedState;
+import sdm.sccpms.child.wishListStates.WishListClosedStateFactory;
+import sdm.sccpms.child.wishListStates.WishListOpenState;
+import sdm.sccpms.child.wishListStates.WishListOpenStateFactory;
 import sdm.sccpms.gift.BinaryGiftGivingStrategy;
 import sdm.sccpms.gift.GiftFactory;
 import sdm.sccpms.gift.GiftWrap;
@@ -53,7 +55,7 @@ public class SantaClausTest {
 
 		this.santa = new SantaClausHQ(giftFactory, new BinaryGiftGivingStrategy());
 		
-		ChildCreator creator = new ChildCreator(this.santa);
+		ChildCreator creator = new ChildCreator(this.santa, new WishListOpenStateFactory(), new WishListClosedStateFactory());
 		this.child = creator.create("Max", "Street 9, 1001 City, Country");		
 		this.child.addToWishList(IPod.ID);		
 		this.child.addToWishList(Book.ID);	

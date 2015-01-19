@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import sdm.sccpms.SantaClausHQ;
 import sdm.sccpms.child.Child;
+import sdm.sccpms.child.wishListStates.WishListClosedStateFactory;
+import sdm.sccpms.child.wishListStates.WishListOpenStateFactory;
 
 public class ChildCreatorTest {
 	private ChildCreator childCreator;
@@ -15,7 +17,11 @@ public class ChildCreatorTest {
 	@Before
 	public void init() {
 		this.santa = new SantaClausHQ(null, null);
-		this.childCreator = new ChildCreator(santa);
+		this.childCreator = new ChildCreator(
+			santa,
+			new WishListOpenStateFactory(),
+			new WishListClosedStateFactory()
+		);
 	}
 	
 	@Test

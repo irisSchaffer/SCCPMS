@@ -1,7 +1,10 @@
-package sdm.sccpms.child;
+package sdm.sccpms.child.wishListStates;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import sdm.sccpms.child.ChildProxy;
+import sdm.sccpms.child.WishListState;
 
 public class WishListOpenState extends WishListState {
 
