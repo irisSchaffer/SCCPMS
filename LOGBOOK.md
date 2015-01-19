@@ -136,4 +136,6 @@ analyses etc.
 
 - *13:12*: Put all new parts together and made tests work again, adapted test driver.
 
+##### *Presentation and work break*
 
+*19:31*: Added in Wish List State Factories to make the wish list states created in the child creator exchangable.
