@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import sdm.sccpms.child.Child;
+import sdm.sccpms.child.ChildCreator;
 import sdm.sccpms.gift.BinaryGiftGivingStrategy;
 import sdm.sccpms.gift.GiftFactory;
 import sdm.sccpms.gift.GiftGivingStrategyInterface;
@@ -24,9 +25,11 @@ public class TestDriver {
 		
 		SantaClausHQ santaHQ = new SantaClausHQ(giftFactory, giftGivingStrategy);
 		
-		Child tim = new Child("Tim", "Street 10, AA1 BB23 City, UK");
-		Child chloe = new Child("Chloé", "Rue 945, 12345 Ville, France", 0.0f);
-		Child manuel = new Child("Manuel", "Straße 1, 1000 Stadt, Österreich");
+		ChildCreator creator = new ChildCreator(santaHQ);
+		
+		Child tim = creator.create("Tim", "Street 10, AA1 BB23 City, UK");
+		Child chloe = creator.create("Chloé", "Rue 945, 12345 Ville, France", 0.0f);
+		Child manuel = creator.create("Manuel", "Straße 1, 1000 Stadt, Österreich");
 		
 		santaHQ.addChild(tim);
 		santaHQ.addChild(chloe);
