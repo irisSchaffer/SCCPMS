@@ -11,6 +11,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import sdm.sccpms.child.Child;
+import sdm.sccpms.child.ChildCreator;
+import sdm.sccpms.child.WishListClosedState;
+import sdm.sccpms.child.WishListOpenState;
 import sdm.sccpms.gift.BinaryGiftGivingStrategy;
 import sdm.sccpms.gift.GiftFactory;
 import sdm.sccpms.gift.GiftWrap;
@@ -33,11 +36,7 @@ public class SantaClausTest {
 	private Child child;
 
 	@Before
-	public void init() {
-		this.child = new Child("Max", "Street 9, 1001 City, Country");		
-		this.child.addToWishList(IPod.ID);		
-		this.child.addToWishList(Book.ID);	
-		
+	public void init() {		
 		Map<String, ProductFactoryInterface> productFactories = new HashMap<String, ProductFactoryInterface>();
 		productFactories.put(IPod.ID, new IPodFactory());
 		productFactories.put(Bicycle.ID, new BicycleFactory());
@@ -52,14 +51,18 @@ public class SantaClausTest {
 		
 		this.giftFactory = new GiftFactory(productFactories, giftWraps);
 
-		this.santa = new SantaClausHQ(giftFactory, new BinaryGiftGivingStrategy());						
+		this.santa = new SantaClausHQ(giftFactory, new BinaryGiftGivingStrategy());
+		
+		ChildCreator creator = new ChildCreator(this.santa);
+		this.child = creator.create("Max", "Street 9, 1001 City, Country");		
+		this.child.addToWishList(IPod.ID);		
+		this.child.addToWishList(Book.ID);	
 	}
 	
 	@Test
 	public void testAddChild() {
 		this.santa.addChild(child);
 		assertEquals(1, this.santa.getChildRecords().size());
-		assertTrue(child.getWishGranter() instanceof SantaClausHQ);
 	}
 	
 	@Test

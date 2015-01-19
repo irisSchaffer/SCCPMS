@@ -29,8 +29,7 @@ import sdm.sccpms.products.TVSet;
 import sdm.sccpms.products.TVSetFactory;
 
 public class ChildProxyTest {
-	Child child;
-	ChildCreator creator;
+	ChildProxy child;
 	SantaClausHQ santa;
 	
 	@Before
@@ -54,12 +53,19 @@ public class ChildProxyTest {
 	
 	@Test
 	public void testObserver() {
-		child = new ChildProxy("Tom", "Address");
-		child.setGiftGranter(this.santa);
+		this.child = new ChildProxy("Tom", "Address");
+		WishListState openState = new WishListOpenState(child);
+		WishListState closeState = new WishListClosedState(child);
+		this.child.setWishListClosedState(closeState);
+		this.child.setWishListOpenState(openState);
+		this.child.setWishListState(this.child.getWishListOpenState());
 		
-		child.addToWishList(IPod.ID);
-		child.putWishListOnWindowSill();
+		this.child.setWishGranter(this.santa);
+		
+		this.child.addToWishList(IPod.ID);
+		this.child.putWishListOnWindowSill();
 		
 		assertEquals(1, this.santa.getGifts().size());
 	}
+
 }

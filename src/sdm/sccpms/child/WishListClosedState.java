@@ -5,6 +5,10 @@ import java.util.List;
 
 public class WishListClosedState extends WishListState {
 
+	public WishListClosedState(ChildProxy child) {
+		super(child);
+	}
+
 	@Override
 	public void addToWishList(String wish) {
 		throw new IllegalStateException("Cannot add wish to list wish, list is already lying on window sill waiting for gift wisher to grab it.");

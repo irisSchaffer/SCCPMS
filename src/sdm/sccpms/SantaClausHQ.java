@@ -26,7 +26,6 @@ public class SantaClausHQ implements WishGranterInterface {
 		if (! this.childRecords.containsKey(child)) {
 			ChildRecord cr = new ChildRecord(child);
 			this.childRecords.put(child, cr);
-			child.setWishGranter(this);
 		}
 	}
 	

@@ -12,15 +12,16 @@ import sdm.sccpms.products.Bicycle;
 import sdm.sccpms.products.IPod;
 
 public class WishListClosedStateTest {
-	Child child;
+	ChildProxy child;
 	
 	@Before
 	public void init() {
 		this.child = new ChildProxy("Alex", "Address");
-		this.child.setWishListClosedState(new WishListClosedState());
-		this.child.setWishListOpenState(new WishListOpenState());
-		
-		this.child.setWishState(this.child.getWishListClosedState());
+		WishListState openState = new WishListOpenState(child);
+		WishListState closeState = new WishListClosedState(child);
+		this.child.setWishListClosedState(closeState);
+		this.child.setWishListOpenState(openState);
+		this.child.setWishListState(this.child.getWishListClosedState());
 	}
 	
 	@Test(expected=IllegalStateException.class)
@@ -38,7 +39,7 @@ public class WishListClosedStateTest {
 		this.child.getWishList().add(Bicycle.ID);
 		List<String> wishList = this.child.takeWishList();
 		assertEquals(1, wishList.size());
-		assertEquals(0, this.child.getWishList());
+		assertEquals(0, this.child.getWishList().size());
 		assertTrue(this.child.getWishListState() instanceof WishListOpenState);
 	}
 }

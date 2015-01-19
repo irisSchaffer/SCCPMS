@@ -5,6 +5,10 @@ import java.util.List;
 
 public class WishListOpenState extends WishListState {
 
+	public WishListOpenState(ChildProxy child) {
+		super(child);
+	}
+
 	@Override
 	public void addToWishList(String wish) {
 		this.child.getWishList().add(wish);
@@ -12,7 +16,6 @@ public class WishListOpenState extends WishListState {
 
 	@Override
 	public void putWishListOnWindowSill() {
-		System.out.format("%s puts wish list on window sill.\n", this.child.getName());
 		this.child.setWishListState(this.child.getWishListClosedState());
 	}
 

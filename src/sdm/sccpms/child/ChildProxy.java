@@ -33,6 +33,8 @@ public class ChildProxy extends Child {
 		if (null != this.wishGranter) {
 			this.wishGranter.onWishListFinished(this);			
 		}
+		
+		super.putWishListOnWindowSill();
 	}
 
 	public WishListStateInterface getWishListOpenState() {

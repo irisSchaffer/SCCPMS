@@ -15,26 +15,21 @@ public class ChildCreatorTest {
 	@Before
 	public void init() {
 		this.santa = new SantaClausHQ(null, null);
-		WishListState closedState = new ClosedWishListState();
-		WishListState openState = new ClosedWishListState();
-		
-		this.childCreator = new ChildCreator(santa, openState, closedState);
+		this.childCreator = new ChildCreator(santa);
 	}
 	
 	@Test
 	public void testCreation() {
-		Child tom = this.childCreator.create("Tom", "Address");
-		assertEquals(tom instanceof ChildProxy);
+		ChildProxy tom = this.childCreator.create("Tom", "Address");
 		assertEquals("Tom", tom.getName());
 		assertEquals("Address", tom.getAddress());
 		assertEquals(Child.INITIAL_GOODNESS, tom.getGoodness(), 0.0f);
 		
-		Child alex = this.childCreator.create("Alex", "Address2", .7f);
-		assertEquals(alex instanceof ChildProxy);
-		assertEquals(alex.getWishGranter() == this.santa);
-		assertEquals("Alex", tom.getName());
-		assertEquals("Address2", tom.getAddress());
-		assertEquals(.7f, tom.getGoodness(), 0.0f);
+		ChildProxy alex = this.childCreator.create("Alex", "Address2", .7f);
+		assertEquals(this.santa, alex.getWishGranter());
+		assertEquals("Alex", alex.getName());
+		assertEquals("Address2", alex.getAddress());
+		assertEquals(.7f, alex.getGoodness(), 0.0f);
 	}
 
 }

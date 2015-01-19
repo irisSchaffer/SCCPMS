@@ -17,7 +17,6 @@ public class Child {
 	
 	private List<String> wishList;
 	private List<Gift> gifts;
-	private WishGranterInterface wishGranter;
 		
 	public Child(String name, String address) {
 		this(name, address, Child.INITIAL_GOODNESS);		
@@ -121,19 +120,8 @@ public class Child {
 		}
 	}
 
-	public WishGranterInterface getWishGranter() {
-		return wishGranter;
-	}
-
-	public void setWishGranter(WishGranterInterface wishGranter) {
-		this.wishGranter = wishGranter;
-	}
-
 	public void putWishListOnWindowSill() {
-		
-		if (null != this.wishGranter) {
-			this.wishGranter.onWishListFinished(this);			
-		}
+		System.out.format("%s has put wish list on window sill.\n", this.getName());
 	}
 
 	@Override
