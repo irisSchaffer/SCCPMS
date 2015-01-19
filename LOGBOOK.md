@@ -124,4 +124,14 @@ analyses etc.
 
 *01:09*: Bits and bobs, added in log book entries using git history, cleaning up project.
 
+*03:15*: Added UML diagrams and use cases.
+
 ##### *Going to bed*
+
+*11:30-13:12*: Woke up and had idea how to solve yesterday's problem, so started working on a child proxy on new branch [child-proxy](https://github.com/irisSchaffer/SCCPMS/tree/child-proxy):
+
+- *12:03*: Created tests for child proxy, child creator and wish list states and moved child related stuff to its own package
+
+- *12:26*: Added ChildCreator, ChildProxy and WishListStates
+
+- *13:12*: Put all new parts together and made tests work again, adapted test driver.
