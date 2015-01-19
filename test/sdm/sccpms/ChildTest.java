@@ -2,17 +2,11 @@ package sdm.sccpms;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class ChildTest {
 	static final String NAME = "Tom";
 	static final String STREET = "Teststreet 5";
-	
-	@Before
-	public void init() {
-		
-	}
 	
 	@Test
 	public void testChildConstructors() {

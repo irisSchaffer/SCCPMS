@@ -130,7 +130,10 @@ public class Child {
 
 	public void putWishListOnWindowSill() {
 		System.out.format("%s puts wish list on window sill.\n", this.getName());
-		this.wishGranter.onWishListFinished(this);
+		
+		if (null != this.wishGranter) {
+			this.wishGranter.onWishListFinished(this);			
+		}
 	}
 
 	@Override
