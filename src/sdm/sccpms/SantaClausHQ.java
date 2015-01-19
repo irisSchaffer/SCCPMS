@@ -35,7 +35,7 @@ public class SantaClausHQ implements WishGranterInterface {
 		ChristmasRecord christmasRecord = new ChristmasRecord(child.takeWishList());
 		this.addChristmasRecordforChild(christmasRecord, child);
 		
-		System.out.format("\nElfs work on gifts for %s:\n", child.getName());
+		System.out.format("\nElves work on gifts for %s:\n", child.getName());
 		for (String wish: christmasRecord.getWishList()) {
 			System.out.print(" - ");
 			this.gifts.add(this.giftFactory.createGift(wish, child));
