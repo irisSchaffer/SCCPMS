@@ -31,7 +31,7 @@ public class SantaClausHQ implements WishGranterInterface {
 	
 	@Override
 	public void onWishListFinished(Child child) {
-		System.out.format("Santa Clause takes %s's wish list.\n", child.getName());
+		System.out.format("Santa Claus takes %s's wish list.\n", child.getName());
 		ChristmasRecord christmasRecord = new ChristmasRecord(child.takeWishList());
 		this.addChristmasRecordforChild(christmasRecord, child);
 		
