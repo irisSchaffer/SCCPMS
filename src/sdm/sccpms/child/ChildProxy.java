@@ -29,12 +29,11 @@ public class ChildProxy extends Child {
 	
 	public void putWishListOnWindowSill() {
 		this.wishListState.putWishListOnWindowSill();
-		
+		super.putWishListOnWindowSill();
+
 		if (null != this.wishGranter) {
 			this.wishGranter.onWishListFinished(this);			
 		}
-		
-		super.putWishListOnWindowSill();
 	}
 
 	public WishListStateInterface getWishListOpenState() {
