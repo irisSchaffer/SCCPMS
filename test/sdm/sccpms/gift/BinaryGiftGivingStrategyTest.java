@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import sdm.sccpms.Child;
+import sdm.sccpms.child.Child;
 import sdm.sccpms.products.Bicycle;
 
 public class BinaryGiftGivingStrategyTest {

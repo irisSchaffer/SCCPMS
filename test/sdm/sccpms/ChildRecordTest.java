@@ -8,6 +8,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import sdm.sccpms.child.Child;
+
 public class ChildRecordTest {
 	ChildRecord childRecord;
 	Child child;

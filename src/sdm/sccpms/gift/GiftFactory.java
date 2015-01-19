@@ -3,9 +3,9 @@ package sdm.sccpms.gift;
 import java.util.List;
 import java.util.Map;
 
-import sdm.sccpms.Child;
 import sdm.sccpms.ProductFactoryInterface;
 import sdm.sccpms.ProductInterface;
+import sdm.sccpms.child.Child;
 import sdm.sccpms.exceptions.UndefinedProductException;
 
 public class GiftFactory {

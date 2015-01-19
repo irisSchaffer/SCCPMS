@@ -9,8 +9,8 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import sdm.sccpms.Child;
 import sdm.sccpms.ProductFactoryInterface;
+import sdm.sccpms.child.Child;
 import sdm.sccpms.exceptions.UndefinedProductException;
 import sdm.sccpms.gift.Gift;
 import sdm.sccpms.gift.GiftFactory;

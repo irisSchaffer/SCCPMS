@@ -1,7 +1,7 @@
 package sdm.sccpms.gift;
 
-import sdm.sccpms.Child;
 import sdm.sccpms.ProductInterface;
+import sdm.sccpms.child.Child;
 
 public class Gift {
 	private GiftWrap giftWrap;

@@ -1,8 +1,9 @@
-package sdm.sccpms;
+package sdm.sccpms.child;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import sdm.sccpms.WishGranterInterface;
 import sdm.sccpms.gift.Gift;
 
 public class Child {

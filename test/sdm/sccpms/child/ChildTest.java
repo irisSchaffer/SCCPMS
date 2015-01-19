@@ -1,8 +1,10 @@
-package sdm.sccpms;
+package sdm.sccpms.child;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import sdm.sccpms.child.Child;
 
 public class ChildTest {
 	static final String NAME = "Tom";

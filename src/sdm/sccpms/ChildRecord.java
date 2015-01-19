@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import sdm.sccpms.child.Child;
+
 public class ChildRecord {
 	private Child child;
 	private Map<Integer, ChristmasRecord> christmasRecords;
