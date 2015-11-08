@@ -3,7 +3,7 @@ Santa Claus Christmas Present Management System (Software Design Methods Project
 
 ## The assignment
 
-This project was Areen Said's ([Southgarden116](https://github.com/Southgarden116)) and Iris Schaffer's ([irisSchaffer](https://github.com/irisSchaffer)) semester project for the *IM410 - Software Design Methods* class of the master degree *Interactive Media* at the [University of Applied Sciences Upper Austria, Hagenberg Campus](http://www-en.fh-ooe.at/hagenberg-campus). The goal was not to create production code but to apply the knowledge about design patterns and software architecture gained in the *Software Design Methods* class in a small application using TDD.
+This project was Areen Said's ([Southgarden116](https://github.com/Southgarden116)) and Iris Schaffer's ([irisSchaffer](https://github.com/irisSchaffer)) semester project for the *IM410 - Software Design Methods* class of the master degree *Interactive Media* at the [University of Applied Sciences Upper Austria, Hagenberg Campus](http://www-en.fh-ooe.at/hagenberg-campus). The goal was not to create production code but to apply the knowledge about design patterns and software architecture gained in the *Software Design Methods* class in an example project using TDD.
 
 ## Project Description
 
